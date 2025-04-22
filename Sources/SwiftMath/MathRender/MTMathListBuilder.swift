@@ -290,7 +290,11 @@ public struct MTMathListBuilder {
                 } else {
                     // Create a new table with the current list and a default env
                     let table = self.buildTable(env: nil, firstList: list, isRow: false)
-                    return MTMathList(atom: table!)
+                    if let table = table {
+                        return MTMathList(atom: table)
+                    } else {
+                        return nil
+                    }
                 }
             } else if spacesAllowed && char == " " {
                 // If spaces are allowed then spaces do not need escaping with a \ before being used.
